@@ -6,7 +6,7 @@ import 'package:project_network_bloc4/services/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({this.usersRepository}) : assert(usersRepository != null);
-  final UsersRepository? usersRepository;
+  final UsersRepository usersRepository;
 
   @override
   UserState get initialState => UserEmptyState();
@@ -16,7 +16,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserLoadEvent) {
       yield UserLoadingState();
       try {
-        final List<User> _loadedUserList = await usersRepository!.getAllUsers();
+        final List<User> _loadedUserList = await usersRepository.getAllUsers();
         yield UserLoadedState(loadedUser: _loadedUserList);
       } catch (_) {
         yield UserErrorState();

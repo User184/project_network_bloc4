@@ -4,7 +4,7 @@ import 'package:project_network_bloc4/bloc/user_bloc.dart';
 import 'package:project_network_bloc4/bloc/user_state.dart';
 
 class UserList extends StatelessWidget {
-  const UserList({Key? key}) : super(key: key);
+  const UserList({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,33 +15,37 @@ class UserList extends StatelessWidget {
             child: Text('No data'),
           );
         }
+
         if (state is UserLoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
+
         if (state is UserLoadedState) {
           return ListView.builder(
-            itemCount: state.loadedUser!.length,
-            itemBuilder: (ctx, index) => Container(
-              child: ListTile(
-                leading: const Text('ID: 1'),
-                title: Column(
-                  children: [
-                    const Text(
-                      'My Name',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        Text('Email: test@test.ru'),
-                        Text('Phone: 123456789'),
-                      ],
-                    ),
-                  ],
-                ),
+            itemCount: state.loadedUser.length,
+            itemBuilder: (ctx, index) => ListTile(
+              leading: Text('ID: ${state.loadedUser[index].id}'),
+              title: Column(
+                children: [
+                  Text(
+                    'My Name: ${state.loadedUser[index].name}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Email: ${state.loadedUser[index].email}'),
+                      Text('Phone: ${state.loadedUser[index].phone}'),
+                    ],
+                  ),
+                ],
               ),
             ),
           );
+        } else {
+          return const SizedBox();
         }
       },
     );
