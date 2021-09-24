@@ -21,7 +21,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       } catch (_) {
         yield UserErrorState();
       }
-    } else if (event is UserCleanEvent) {
+    } else if (event is UserClearEvent) {
       yield UserEmptyState();
     }
   }
