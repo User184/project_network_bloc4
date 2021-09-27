@@ -5,11 +5,11 @@ import 'package:project_network_bloc4/models/user.dart';
 import 'package:project_network_bloc4/services/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc({this.usersRepository}) : assert(usersRepository != null);
+  UserBloc({this.usersRepository}) : super(UserEmptyState());
   final UsersRepository usersRepository;
 
-  @override
-  UserState get initialState => UserEmptyState();
+  // @override
+  // UserState get initialState => UserEmptyState();
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {

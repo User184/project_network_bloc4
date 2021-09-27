@@ -9,7 +9,6 @@ class UserProvider {
   Future<List<User>> getUser() async {
     var url = Uri.parse('https://jsonplaceholder.typicode.com/users');
     final response = await http.get(url);
-    print(response);
 
     if (response.statusCode == 200) {
       final List<dynamic> userJson = json.decode(response.body);
