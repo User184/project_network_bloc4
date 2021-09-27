@@ -8,9 +8,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({this.usersRepository}) : super(UserEmptyState());
   final UsersRepository usersRepository;
 
-  // @override
-  // UserState get initialState => UserEmptyState();
-
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
     if (event is UserLoadEvent) {
