@@ -24,8 +24,9 @@ class User {
 
 //https://jsonplaceholder.typicode.com/users
 
-class Us {
-  Us({
+// Us  получен через автогенерацию модели.
+class UserAll {
+  UserAll({
     int id,
     String name,
     String username,
@@ -45,7 +46,7 @@ class Us {
     _company = company;
   }
 
-  Us.fromJson(dynamic json) {
+  UserAll.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _username = json['username'];
