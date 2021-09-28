@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 abstract class UserState {}
+
+class UserInitState extends UserState {}
 
 class UserEmptyState extends UserState {}
 
@@ -8,7 +8,7 @@ class UserLoadingState extends UserState {}
 
 class UserLoadedState extends UserState {
   List<dynamic> loadedUser;
-  UserLoadedState({@required this.loadedUser}) : assert(loadedUser != null);
+  UserLoadedState({required this.loadedUser});
 }
 
 class UserErrorState extends UserState {}

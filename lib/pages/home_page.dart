@@ -6,7 +6,7 @@ import 'package:project_network_bloc4/widgets/action_buttons.dart';
 import 'package:project_network_bloc4/widgets/user_list.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
   final userRepository = UsersRepository();
 
   @override

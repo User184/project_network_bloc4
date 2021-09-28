@@ -5,7 +5,7 @@ import 'package:project_network_bloc4/bloc/user_event.dart';
 import 'package:project_network_bloc4/services/user_api_provider.dart';
 
 class ActionButtons extends StatelessWidget {
-  const ActionButtons({Key key}) : super(key: key);
+  const ActionButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

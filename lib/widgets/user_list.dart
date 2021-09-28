@@ -4,7 +4,7 @@ import 'package:project_network_bloc4/bloc/user_bloc.dart';
 import 'package:project_network_bloc4/bloc/user_state.dart';
 
 class UserList extends StatelessWidget {
-  const UserList({Key key}) : super(key: key);
+  const UserList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
