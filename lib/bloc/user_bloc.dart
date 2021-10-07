@@ -3,22 +3,39 @@ import 'package:project_network_bloc4/models/user.dart';
 import 'package:project_network_bloc4/services/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc({this.usersRepository}) : super(UserEmptyState());
   final UsersRepository? usersRepository;
 
-  @override
-  Stream<UserState> mapEventToState(UserEvent event) async* {
-    if (event is UserLoadEvent) {
-      yield UserLoadingState();
-      try {
-        final List<UserAll> _loadedUserList =
-            await usersRepository!.getAllUsers();
-        yield UserLoadedState(loadedUser: _loadedUserList);
-      } catch (_) {
-        yield UserErrorState();
-      }
-    } else if (event is UserClearEvent) {
-      yield UserEmptyState();
+  UserBloc({this.usersRepository}) : super(UserEmptyState()) {
+    on<UserLoadEvent>(_onUserLoadEvent);
+  }
+
+  // @override
+  // Stream<UserState> mapEventToState(UserEvent event) async* {
+  //   if (event is UserLoadEvent) {
+  //     yield UserLoadingState();
+  //     try {
+  //       final List<UserAll> _loadedUserList =
+  //           await usersRepository!.getAllUsers();
+  //       yield UserLoadedState(loadedUser: _loadedUserList);
+  //     } catch (_) {
+  //       yield UserErrorState();
+  //     }
+  //   } else if (event is UserClearEvent) {
+  //     yield UserEmptyState();
+  //   }
+  // }
+
+  Future<void> _onUserLoadEvent(
+    UserLoadEvent event,
+    Emitter<UserState> emit,
+  ) async {
+    emit(UserLoadingState());
+    try {
+      final List<UserAll> _loadedUserList =
+          await usersRepository!.getAllUsers();
+      emit(UserLoadedState(loadedUser: _loadedUserList));
+    } catch (_) {
+      emit(UserErrorState());
     }
   }
 }
@@ -28,7 +45,6 @@ abstract class UserEvent {}
 class UserLoadEvent extends UserEvent {}
 
 class UserClearEvent extends UserEvent {}
-
 
 abstract class UserState {}
 
