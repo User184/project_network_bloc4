@@ -1,6 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_network_bloc4/bloc/user_event.dart';
-import 'package:project_network_bloc4/bloc/user_state.dart';
 import 'package:project_network_bloc4/models/user.dart';
 import 'package:project_network_bloc4/services/user_repository.dart';
 
@@ -13,7 +11,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserLoadEvent) {
       yield UserLoadingState();
       try {
-        final List<User> _loadedUserList = await usersRepository!.getAllUsers();
+        final List<UserAll> _loadedUserList =
+            await usersRepository!.getAllUsers();
         yield UserLoadedState(loadedUser: _loadedUserList);
       } catch (_) {
         yield UserErrorState();
@@ -23,3 +22,25 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 }
+
+abstract class UserEvent {}
+
+class UserLoadEvent extends UserEvent {}
+
+class UserClearEvent extends UserEvent {}
+
+
+abstract class UserState {}
+
+class UserInitState extends UserState {}
+
+class UserEmptyState extends UserState {}
+
+class UserLoadingState extends UserState {}
+
+class UserLoadedState extends UserState {
+  List<dynamic> loadedUser;
+  UserLoadedState({required this.loadedUser});
+}
+
+class UserErrorState extends UserState {}

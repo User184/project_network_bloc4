@@ -8,29 +8,29 @@ class UserProvider {
   static const urlConst = 'https://jsonplaceholder.typicode.com/users';
 
   //Через Http пакет.
-  Future<List<User>> getUserHttp() async {
+  Future<List<UserAll>> getUserHttp() async {
     var url = Uri.parse(urlConst);
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> userJson = json.decode(response.body);
       //print('userJson: $userJson');
-      return userJson.map((json) => User.fromJson(json)).toList();
+      return userJson.map((json) => UserAll.fromJson(json)).toList();
     } else {
       throw Exception('Error fetching users');
     }
   }
 
-  final List<User> userJson = [];
+  final List<UserAll> userJson = [];
 
   //Через Dio пакет.
-  Future<List<User>> getUserDio() async {
+  Future<List<UserAll>> getUserDio() async {
     var response = await Dio().get(urlConst);
     final dynamic data = response.data;
     //print('data1: ${data}');
     if (data is List<dynamic>) {
       userJson.clear();
       userJson.addAll(
-          data.map((dynamic e) => User.fromJson(e as Map<String, dynamic>)));
+          data.map((dynamic e) => UserAll.fromJson(e as Map<String, dynamic>)));
       return userJson;
     } else {
       throw Exception('Error fetching users');
