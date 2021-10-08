@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 class User {
   int? id;
   String? name;
@@ -25,37 +27,49 @@ class User {
 //https://jsonplaceholder.typicode.com/users
 
 // Us  получен через автогенерацию модели.
-class UserAll {
-  int? id;
-  String? name;
-  String? username;
-  String? email;
-  Address? address;
-  String? phone;
-  String? website;
-  Company? company;
+class UserAll extends Equatable {
+  final int id;
+  final String name;
+  final String username;
+  final String email;
+  final Address address;
+  final String phone;
+  final String website;
+  final Company company;
 
-  UserAll(
-      {this.id,
-      this.name,
-      this.username,
-      this.email,
-      this.address,
-      this.phone,
-      this.website,
-      this.company});
+  const UserAll(
+      {required this.id,
+      required this.name,
+      required this.username,
+      required this.email,
+      required this.address,
+      required this.phone,
+      required this.website,
+      required this.company});
 
-  UserAll.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    username = json['username'];
-    email = json['email'];
-    address =
-        json['address'] != null ? Address.fromJson(json['address']) : null;
-    phone = json['phone'];
-    website = json['website'];
-    company =
-        json['company'] != null ? Company.fromJson(json['company']) : null;
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        username,
+        email,
+        address,
+        phone,
+        website,
+        company,
+      ];
+
+  factory UserAll.fromJson(dynamic json) {
+    return UserAll(
+      id: json['id'],
+      name: json['name'],
+      username: json['username'],
+      email: json['email'],
+      address: Address.fromJson(json['address']),
+      phone: json['phone'],
+      website: json['website'],
+      company: Company.fromJson(json['company']),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -64,14 +78,11 @@ class UserAll {
     map['name'] = name;
     map['username'] = username;
     map['email'] = email;
-    if (address != null) {
-      map['address'] = address!.toJson();
-    }
+    map['address'] = address.toJson();
     map['phone'] = phone;
     map['website'] = website;
-    if (company != null) {
-      map['company'] = company!.toJson();
-    }
+    map['company'] = company.toJson();
+
     return map;
   }
 }
@@ -80,21 +91,29 @@ class UserAll {
 /// catchPhrase : "Multi-layered client-server neural-net"
 /// bs : "harness real-time e-markets"
 
-class Company {
-  String? name;
-  String? catchPhrase;
-  String? bs;
+class Company extends Equatable {
+  final String name;
+  final String catchPhrase;
+  final String bs;
 
-  Company({
-    this.name,
-    this.catchPhrase,
-    this.bs,
+  const Company({
+    required this.name,
+    required this.catchPhrase,
+    required this.bs,
   });
 
-  Company.fromJson(dynamic json) {
-    name = json['name'];
-    catchPhrase = json['catchPhrase'];
-    bs = json['bs'];
+  @override
+  List<Object?> get props => [name, catchPhrase, bs];
+
+  factory Company.fromJson(dynamic json) {
+    return Company(
+      name: json['name'],
+      catchPhrase: json['catchPhrase'],
+      bs: json['bs'],
+    );
+    // name = json['name'];
+    // catchPhrase = json['catchPhrase'];
+    // bs = json['bs'];
   }
 
   Map<String, dynamic> toJson() {
@@ -112,27 +131,32 @@ class Company {
 /// zipcode : "92998-3874"
 /// geo : {"lat":"-37.3159","lng":"81.1496"}
 
-class Address {
-  String? street;
-  String? suite;
-  String? city;
-  String? zipcode;
-  Geo? geo;
+class Address extends Equatable {
+  final String street;
+  final String suite;
+  final String city;
+  final String zipcode;
+  final Geo geo;
 
-  Address({
-    this.street,
-    this.suite,
-    this.city,
-    this.zipcode,
-    this.geo,
+  const Address({
+    required this.street,
+    required this.suite,
+    required this.city,
+    required this.zipcode,
+    required this.geo,
   });
 
-  Address.fromJson(dynamic json) {
-    street = json['street'];
-    suite = json['suite'];
-    city = json['city'];
-    zipcode = json['zipcode'];
-    geo = json['geo'] != null ? Geo.fromJson(json['geo']) : null;
+  @override
+  List<Object?> get props => [street, suite, city, zipcode, geo];
+
+  factory Address.fromJson(dynamic json) {
+    return Address(
+      street: json['street'],
+      suite: json['suite'],
+      city: json['city'],
+      zipcode: json['zipcode'],
+      geo: Geo.fromJson(json['geo']),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -141,9 +165,8 @@ class Address {
     map['suite'] = suite;
     map['city'] = city;
     map['zipcode'] = zipcode;
-    if (geo != null) {
-      map['geo'] = geo!.toJson();
-    }
+    map['geo'] = geo.toJson();
+
     return map;
   }
 }
@@ -151,18 +174,25 @@ class Address {
 /// lat : "-37.3159"
 /// lng : "81.1496"
 
-class Geo {
-  String? lat;
-  String? lng;
+class Geo extends Equatable {
+  final String lat;
+  final String lng;
 
-  Geo({
-    this.lat,
-    this.lng,
+  const Geo({
+    required this.lat,
+    required this.lng,
   });
 
-  Geo.fromJson(dynamic json) {
-    lat = json['lat'];
-    lng = json['lng'];
+  @override
+  List<Object?> get props => throw UnimplementedError();
+
+  factory Geo.fromJson(dynamic json) {
+    return Geo(
+      lat: json['lat'],
+      lng: json['lng'],
+    );
+    // lat = json['lat'];
+    // lng = json['lng'];
   }
 
   Map<String, dynamic> toJson() {
