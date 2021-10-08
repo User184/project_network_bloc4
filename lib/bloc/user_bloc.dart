@@ -7,6 +7,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   UserBloc({this.usersRepository}) : super(UserEmptyState()) {
     on<UserLoadEvent>(_onUserLoadEvent);
+    on<UserClearEvent>(_onUserClearEvent);
   }
 
   // @override
@@ -37,6 +38,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } catch (_) {
       emit(UserErrorState());
     }
+  }
+
+  void _onUserClearEvent(
+    UserClearEvent event,
+    Emitter<UserState> emit,
+  ) {
+    emit(UserEmptyState());
   }
 }
 
