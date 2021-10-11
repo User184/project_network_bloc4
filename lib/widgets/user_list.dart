@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_network_bloc4/bloc/user_bloc.dart';
+import 'package:project_network_bloc4/bloc/user_cubit.dart';
 
 class UserList extends StatelessWidget {
   const UserList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is UserEmptyState) {
           return const Center(
@@ -37,7 +37,8 @@ class UserList extends StatelessWidget {
                     children: [
                       Text('Email: ${state.loadedUser[index].email}'),
                       Text('Phone: ${state.loadedUser[index].phone}'),
-                      Text('Address: city ${state.loadedUser[index].address.city}'),
+                      Text(
+                          'Address: city ${state.loadedUser[index].address.city}'),
                       Text('Geo: ${state.loadedUser[index].address.geo.lat}'),
                     ],
                   ),
