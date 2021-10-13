@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 class User {
   int? id;
   String? name;
@@ -27,7 +25,7 @@ class User {
 //https://jsonplaceholder.typicode.com/users
 
 // Us  получен через автогенерацию модели.
-class UserAll extends Equatable {
+class UserAll {
   final int id;
   final String name;
   final String username;
@@ -46,18 +44,6 @@ class UserAll extends Equatable {
       required this.phone,
       required this.website,
       required this.company});
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        username,
-        email,
-        address,
-        phone,
-        website,
-        company,
-      ];
 
   factory UserAll.fromJson(dynamic json) {
     return UserAll(
@@ -91,7 +77,7 @@ class UserAll extends Equatable {
 /// catchPhrase : "Multi-layered client-server neural-net"
 /// bs : "harness real-time e-markets"
 
-class Company extends Equatable {
+class Company {
   final String name;
   final String catchPhrase;
   final String bs;
@@ -101,9 +87,6 @@ class Company extends Equatable {
     required this.catchPhrase,
     required this.bs,
   });
-
-  @override
-  List<Object?> get props => [name, catchPhrase, bs];
 
   factory Company.fromJson(dynamic json) {
     return Company(
@@ -131,7 +114,7 @@ class Company extends Equatable {
 /// zipcode : "92998-3874"
 /// geo : {"lat":"-37.3159","lng":"81.1496"}
 
-class Address extends Equatable {
+class Address {
   final String street;
   final String suite;
   final String city;
@@ -145,9 +128,6 @@ class Address extends Equatable {
     required this.zipcode,
     required this.geo,
   });
-
-  @override
-  List<Object?> get props => [street, suite, city, zipcode, geo];
 
   factory Address.fromJson(dynamic json) {
     return Address(
@@ -174,7 +154,7 @@ class Address extends Equatable {
 /// lat : "-37.3159"
 /// lng : "81.1496"
 
-class Geo extends Equatable {
+class Geo {
   final String lat;
   final String lng;
 
@@ -182,9 +162,6 @@ class Geo extends Equatable {
     required this.lat,
     required this.lng,
   });
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 
   factory Geo.fromJson(dynamic json) {
     return Geo(

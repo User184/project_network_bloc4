@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_network_bloc4/bloc/user_cubit.dart';
+import 'package:project_network_bloc4/bloc/user_bloc.dart';
 
 class UserList extends StatelessWidget {
   const UserList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         if (state is UserEmptyState) {
           return const Center(
@@ -23,23 +23,23 @@ class UserList extends StatelessWidget {
 
         if (state is UserLoadedState) {
           return ListView.builder(
-            itemCount: state.loadedUser.length,
+            itemCount: state.userAll.length,
             itemBuilder: (ctx, index) => ListTile(
-              leading: Text('ID: ${state.loadedUser[index].id}'),
+              leading: Text('ID: ${state.userAll[index].id}'),
               title: Column(
                 children: [
                   Text(
-                    'My Name: ${state.loadedUser[index].name}',
+                    'My Name: ${state.userAll[index].name}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text('Email: ${state.loadedUser[index].email}'),
-                      Text('Phone: ${state.loadedUser[index].phone}'),
+                      Text('Email: ${state.userAll[index].email}'),
+                      Text('Phone: ${state.userAll[index].phone}'),
                       Text(
-                          'Address: city ${state.loadedUser[index].address.city}'),
-                      Text('Geo: ${state.loadedUser[index].address.geo.lat}'),
+                          'Address: city ${state.userAll[index].address.city}'),
+                      Text('Geo: ${state.userAll[index].address.geo.lat}'),
                     ],
                   ),
                 ],
